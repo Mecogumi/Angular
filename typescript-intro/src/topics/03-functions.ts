@@ -34,3 +34,5 @@ const player: Character = {
 healCharacter(player, 30);
 
 player.showHp()
+
+export { };
