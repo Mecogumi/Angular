@@ -11,7 +11,7 @@ interface Character {
 const strider: Character = {
     name: 'strider',
     hp: 100,
-    skills: ['Bash', 'Counter']
+    skills: skills
 }
 console.log(undefined)
 console.log(strider);
