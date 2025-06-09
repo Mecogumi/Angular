@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, signal, provideZoneChangeDetection, computed } from '@angular/core';
+import { concat } from 'rxjs';
 
 interface Character {
   id: number;
@@ -17,6 +18,9 @@ class char {
   styleUrl: './dragonball.css'
 })
 export class Dragonball {
+  public name = signal<string>('')
+  public power = signal<number>(0)
+
   public characters = signal<Character[]>([
     { id: 1, name: "Goku", power: 9001 },
     { id: 2, name: "Vegeta", power: 9000 },
@@ -25,10 +29,23 @@ export class Dragonball {
   ])
 
   public powerClasses = (character: Character) => computed(() => {
-    console.log(character.name)
     return {
       'text-danger': character.power > 9000
     }
   })
+
+  addCharacter() {
+    if (!this.name() || !this.power() || this.power() <= 0) {
+      return;
+    }
+    const id = this.characters().length + 1
+    console.log(id)
+    const character: Character = {
+      id: id,
+      name: this.name(),
+      power: this.power()
+    }
+    this.characters.update((current): Character[] => { return [...current, character] })
+  }
 
 }
