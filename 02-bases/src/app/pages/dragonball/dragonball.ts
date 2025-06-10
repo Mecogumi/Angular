@@ -23,9 +23,7 @@ export class Dragonball {
 
   public characters = signal<Character[]>([
     { id: 1, name: "Goku", power: 9001 },
-    { id: 2, name: "Vegeta", power: 9000 },
-    { id: 3, name: "Piccolo", power: 8000 },
-    { id: 4, name: 'yamcha', power: 502 }
+    { id: 2, name: "Vegeta", power: 9000 }
   ])
 
   public powerClasses = (character: Character) => computed(() => {
@@ -46,6 +44,12 @@ export class Dragonball {
       power: this.power()
     }
     this.characters.update((current): Character[] => { return [...current, character] })
+    this.resetFields()
+  }
+
+  resetFields() {
+    this.name.set('')
+    this.power.set(0)
   }
 
 }
