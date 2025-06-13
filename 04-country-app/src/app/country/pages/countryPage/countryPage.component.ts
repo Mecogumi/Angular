@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterLinkActive, RouterLinkWithHref } from '@angular/router';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-country-page',
@@ -9,6 +9,10 @@ import { ActivatedRoute, RouterLink, RouterLinkActive, RouterLinkWithHref } from
 })
 export class CountryPageComponent {
 
-  constructor() {
-  }
+  urlParams = inject(ActivatedRoute)
+
+  query = computed(() => {
+    return this.urlParams.params.subscribe((parameters) => console.log(parameters['query']))
+  })
+
 }
