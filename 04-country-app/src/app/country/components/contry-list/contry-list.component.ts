@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnInit } from '@angular/core';
 import { Country } from '../../interfaces/country.interface';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -11,5 +11,12 @@ import { RouterLink } from '@angular/router';
 })
 export class ContryListComponent {
   countries = input.required<Country[]>()
+
+  errorMessage = input<string | unknown>()
+  isLoading = input<boolean>(false)
+  isEmpty = input<boolean>(true)
+
+
+
 
 }

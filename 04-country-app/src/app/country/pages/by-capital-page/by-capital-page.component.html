@@ -1,7 +1,6 @@
 <country-search-input placeHolderText="Buscar por capital" (queryOuput)="query.set($event)"></country-search-input>
-@if (this.countryResource.error()) {
-<h1>No existe</h1>
-}
-@if (countryResource.hasValue()) {
-<contry-list [countries]="countryResource.value()"></contry-list>
-}
+
+
+
+<contry-list [countries]="countryResource.value() ?? []" [errorMessage]="countryResource.error()"
+  [isEmpty]="countryResource.value()?.length===0" [isLoading]="countryResource.isLoading()"></contry-list>

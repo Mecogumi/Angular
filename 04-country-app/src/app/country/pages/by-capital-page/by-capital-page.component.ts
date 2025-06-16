@@ -3,8 +3,9 @@ import { CountrySearchInputComponent } from "../../components/country-search-inp
 import { ContryListComponent } from "../../components/contry-list/contry-list.component";
 import { CountryService } from '../../services/country.service';
 import type { Country } from '../../interfaces/country.interface';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
+
 import { App } from '../../../app';
 
 @Component({
@@ -18,10 +19,11 @@ export class ByCapitalPageComponent {
   countries = signal<Country[]>([])
   query = signal('')
 
-  countryResource = rxResource({
+  countryResource = rxResource<Country[], { query: string }>({
+    //params: () => ({ query: this.query() }),
     params: () => ({ query: this.query() }),
     stream: ({ params }) => {
-      if (params.query === '') return [];
+      if (params.query.trim() === '') return of([]);
       return this.countryService.searchByCapital(params.query)
     }
   })

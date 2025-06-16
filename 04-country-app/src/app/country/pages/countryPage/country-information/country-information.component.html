@@ -1,0 +1,58 @@
+<div class="stats shadow">
+  <!--  -->
+  <div class="stat">
+    <div class="stat-title">Country</div>
+    <div class="stat-figure text-4xl pt-5">{{country().name}}</div>
+    <div class="stat-value pt-2">
+      <div class="avatar">
+        <div class="w-16 rounded-full">
+          <img [src]="country().flagsvg" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  -->
+  <div class="stat">
+    <div class="stat-figure text-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16">
+        <path fill="currentColor"
+          d="M8.501 1.5a.5.5 0 0 0-1 0V2H6.5A1.5 1.5 0 0 0 5 3.5v.504a2 2 0 0 1 2 2V14h2V7.504a2.5 2.5 0 0 1 2-2.45V3.5A1.5 1.5 0 0 0 9.5 2h-.999zM12.5 14H10V7.504a1.5 1.5 0 0 1 1.5-1.5h1V6A1.5 1.5 0 0 1 14 7.5v5a1.5 1.5 0 0 1-1.5 1.5M4.843 5.135a.75.75 0 0 1 1.158.63L6 13.5a.5.5 0 0 1-.5.5h-2A1.5 1.5 0 0 1 2 12.5V7.793a1.5 1.5 0 0 1 .684-1.258z" />
+      </svg>
+      <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        class="inline-block h-8 w-8 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+        </path>
+      </svg> -->
+    </div>
+    <div class="stat-title">Capital</div>
+    <div class="stat-value text-primary">{{country().capital}}</div>
+    <div class="stat-desc">{{country().region}}</div>
+  </div>
+  <!--  -->
+  <div class="stat">
+    <div class="stat-figure text-secondary">
+      <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current" width="48" height="48"
+        viewBox="0 0 48 48">
+        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+          d="M24 20a7 7 0 1 0 0-14a7 7 0 0 0 0 14M6 40.8V42h36v-1.2c0-4.48 0-6.72-.872-8.432a8 8 0 0 0-3.496-3.496C35.92 28 33.68 28 29.2 28H18.8c-4.48 0-6.72 0-8.432.872a8 8 0 0 0-3.496 3.496C6 34.08 6 36.32 6 40.8" />
+      </svg>
+
+    </div>
+    <div class="stat-title">Population</div>
+    <div class="stat-value text-secondary">{{country().population |number}}</div>
+    <div class="stat-desc">Since {{year()}}</div>
+  </div>
+
+</div>
+<section class="size-200">
+  <figure class="diff aspect-16/9" tabindex="0">
+    <div class="diff-item-1" role="img" tabindex="0">
+      <img alt="daisy" class="blur brightness-75" [src]="country().flagsvg" />
+    </div>
+    <div class="diff-item-2" role="img">
+      <img alt="daisy" [src]="country().flagsvg" />
+    </div>
+    <div class="diff-resizer"></div>
+  </figure>
+</section>
