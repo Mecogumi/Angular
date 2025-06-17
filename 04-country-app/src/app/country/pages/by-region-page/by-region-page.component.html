@@ -4,9 +4,11 @@
 <section class="row mt-2">
   <div class="flex-col">
     @for (region of regions; track region) {
-    <button class="btn btn-soft mx-5">{{region}}</button>
+    <button [ngClass]="{'btn-primary': query()===region}" class="btn btn-soft mx-5"
+      (click)="query.set(region)">{{region}}</button>
     }
   </div>
 
 </section>
-<contry-list [countries]="[]"></contry-list>
+<contry-list [countries]="resource.value() ?? []" [isEmpty]="resource.hasValue()" [isLoading]="resource.isLoading()"
+  [errorMessage]="resource.error()"></contry-list>

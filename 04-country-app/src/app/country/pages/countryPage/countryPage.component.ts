@@ -20,7 +20,6 @@ export class CountryPageComponent {
     params: () => ({ query: this.urlParams }),
     stream: ({ params }) => {
       if (params.query.trim() === '') return of();
-      console.log('aaa')
       return this.countryService.searchCountryByCode(params.query)
     }
   })

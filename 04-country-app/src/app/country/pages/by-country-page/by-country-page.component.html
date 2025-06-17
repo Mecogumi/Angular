@@ -1,4 +1,5 @@
-<country-search-input placeHolderText="Buscar por pais" (queryOuput)="query.set($event)"></country-search-input>
+<country-search-input placeHolderText="Buscar por pais" (queryOuput)="query.set($event)"
+  [initialValue]="query()"></country-search-input>
 
 <contry-list [countries]="countryResource.value() ?? []" [errorMessage]="countryResource.error()"
   [isEmpty]="countryResource.hasValue()" [isLoading]="countryResource.isLoading()"></contry-list>

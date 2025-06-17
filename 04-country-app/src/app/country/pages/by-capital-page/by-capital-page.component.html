@@ -1,4 +1,5 @@
-<country-search-input placeHolderText="Buscar por capital" (queryOuput)="query.set($event)"></country-search-input>
+<country-search-input placeHolderText="Buscar por capital" (queryOuput)="query.set($event)"
+  [initialValue]="query()"></country-search-input>
 
 
 

@@ -1,6 +1,6 @@
 <section class="flex flex-row gap-2 mt-2">
   <input #txtInput (keyup.enter)="inputValue.set(txtInput.value)" (keyup)="inputValue.set(txtInput.value)" type="text"
-    class="input input-bordered mr-2 w-56" [placeholder]="placeHolderText()" autofocus>
+    class="input input-bordered mr-2 w-56" [placeholder]="placeHolderText()" autofocus [value]="inputValue()">
   <button (click)="inputValue.set(txtInput.value)" class="btn btn-primary">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
       <path fill="currentColor"

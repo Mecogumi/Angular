@@ -7,6 +7,7 @@ import { firstValueFrom, of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
 
 import { App } from '../../../app';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-by-capital-page',
@@ -17,13 +18,22 @@ import { App } from '../../../app';
 export class ByCapitalPageComponent {
   countryService = inject(CountryService)
   countries = signal<Country[]>([])
-  query = signal('')
+  activatedRoute = inject(ActivatedRoute)
+  router = inject(Router)
+
+  queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? ''
+  query = signal(this.queryParam)
 
   countryResource = rxResource<Country[], { query: string }>({
     //params: () => ({ query: this.query() }),
     params: () => ({ query: this.query() }),
     stream: ({ params }) => {
       if (params.query.trim() === '') return of([]);
+      this.router.navigate(["/country/by-capital"], {
+        queryParams: {
+          query: params.query
+        }
+      })
       return this.countryService.searchByCapital(params.query)
     }
   })
