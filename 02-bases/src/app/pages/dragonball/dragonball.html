@@ -1,0 +1,31 @@
+<h1>Dragonball Page</h1>
+<hr />
+<section class="row">
+
+  <div class="col-12 col-sm-6">
+    <h3>Agregar: {{name()}}</h3>
+    <input #txtInput class="form-control mt-2" type="text" class="form-control" placeholder="Nombre" [value]="name()"
+      (change)="name.set(txtInput.value)">
+    <input #txtPower class="form-control mt-2" type="number" class="form-control" placeholder="Poder" [value]="power()"
+      (change)="power.set(+txtPower.value)">
+    <button class="mt-2 btn btn-primary" (click)="addCharacter()">agregar</button>
+
+
+  </div>
+  <div class=" col-12 col-sm-6">
+    <ul>
+      @for (character of characters(); track character.id;let idx = $index; let e =$odd) {
+      @if (character.power>1000) {<li>
+        <span>{{idx}} {{e}} {{character.name}}</span>
+        <strong [class.text-danger]="character.power>=9000"> ({{character.power}})</strong>
+        <strong [ngClass]="powerClasses(character)()"> {{character.power}}</strong>
+      </li>
+      }
+      @else {
+      <strong>Nada</strong>
+      }
+      }
+    </ul>
+  </div>
+
+</section>

@@ -1,0 +1,14 @@
+<ul>
+  <h1>{{listNamee()}}</h1>
+  @for (character of characters(); track character.id;let idx = $index; let e =$odd) {
+  @if (character.power>1000) {<li>
+    <span>{{idx}} {{e}} {{character.name}}</span>
+    <strong [class.text-danger]="character.power>=9000"> ({{character.power}})</strong>
+    <strong [ngClass]="powerClasses(character)()"> {{character.power}}</strong>
+  </li>
+  }
+  @else {
+  <strong>Nada</strong>
+  }
+  }
+</ul>
