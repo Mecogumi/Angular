@@ -1,0 +1,27 @@
+<section class="mx-10 my-2">
+  <h1 class="text-2xl font-bold">Pipes Numericos</h1>
+  <h3 class="text-xl font-thin">Pipes incluidos en Angular</h3>
+</section>
+
+<div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Number Pipe</div>
+    <div class="stat-value">{{ totalSell()|number }}</div>
+    <div class="stat-desc">{{ totalSell() }}</div>
+  </div>
+  <div class="stat">
+    <div class="stat-title">Number Pipe:"1.0-2"</div>
+    <div class="stat-value">{{ totalSell()|number:'1.0-2' }}</div>
+    <div class="stat-desc">{{ totalSell() }}</div>
+  </div>
+  <div class="stat">
+    <div class="stat-title">Currency pipe</div>
+    <div class="stat-value">{{ totalSell()|currency:"MXN":"symbol-narrow":"1.0-2" }}</div>
+    <div class="stat-desc">{{ totalSell()}}</div>
+  </div>
+  <div class="stat">
+    <div class="stat-title">Percent Pipe</div>
+    <div class="stat-value">{{ percent()|percent:"1.2-2" }}</div>
+    <div class="stat-desc">{{ percent()}}</div>
+  </div>
+</div>
