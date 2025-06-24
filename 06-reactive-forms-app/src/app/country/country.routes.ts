@@ -7,6 +7,7 @@ export const countryRoutes: Routes = [
     children: [
       {
         path: '',
+        title: 'Country',
         component: CountryPageComponent
       }
     ]

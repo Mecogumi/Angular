@@ -6,6 +6,7 @@ export const authRoutes: Routes = [
     children: [
       {
         path: 'sing-up',
+        title: 'Registro',
         component: RegisterPageComponent
       },
       {
