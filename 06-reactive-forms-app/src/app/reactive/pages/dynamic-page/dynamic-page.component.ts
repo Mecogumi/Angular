@@ -14,13 +14,14 @@ import { ErrorArrayPipe } from '../../../pipes/ErrorArray.pipe';
 export class DynamicPageComponent {
   private fb = inject(FormBuilder)
   formUtils = FormUtils
+  index = 0
 
   myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
     favoriteGames: this.fb.array([
       ['Metal guear', [Validators.required, Validators.minLength(5)]],
       ['League of legends', [Validators.required, Validators.minLength(5)]]
-    ], [Validators.minLength(3)])
+    ], [Validators.required, Validators.minLength(3)])
   })
 
   newFavoriteGame = this.fb.control('', [Validators.required, Validators.minLength(5)])
@@ -41,7 +42,15 @@ export class DynamicPageComponent {
 
   onAddNewGame() {
     if (this.newFavoriteGame.invalid) return
-    console.log(this.favoriteGames)
+    const newGame = this.newFavoriteGame.value
+    const validators = [Validators.required, Validators.minLength(5)]
+    let gametoadd = this.fb.control(newGame, validators)
+    this.favoriteGames.push(gametoadd)
     this.newFavoriteGame.reset()
+  }
+
+  onDeleteEvent(index: number) {
+    this.favoriteGames.removeAt(index)
+    return
   }
 }

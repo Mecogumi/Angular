@@ -22,15 +22,18 @@
     <div class="col-sm-9">
 
       <div class="input-group">
-        <input (keydown.enter)="onAddNewGame()" class="form-control" placeholder="Agregar favorito"
-          [formControl]="newFavoriteGame">
-
-
-        <button class="btn btn-outline-primary" type="button">
+        <input (keydown.enter)="$event.preventDefault()" (keydown.enter)="onAddNewGame()" class="form-control"
+          placeholder="Agregar favorito" [formControl]="newFavoriteGame">
+        <button (click)="onAddNewGame()" class="btn btn-outline-primary" type="button">
           Agregar favorito
         </button>
 
       </div>
+      @if (formUtils.isValidField(newFavoriteGame)) {
+      <span class="form-text text-danger">
+        {{newFavoriteGame.errors|errorPipe}}
+      </span>
+      }
     </div>
   </div>
 
@@ -40,14 +43,14 @@
     <label class="col-sm-3 col-form-label">Favoritos</label>
     <div class="col-sm-9" formArrayName="favoriteGames">
 
-      @for (favoriteGame of favoriteGames.controls; track $index; let i=$index) {
+      @for (favoriteGame of favoriteGames.controls; track favoriteGame; let i=$index) {
 
       <div class="mb-1">
 
         <div class="input-group">
           <input class="form-control" [formControlName]="i">
 
-          <button class="btn btn-outline-danger" type="button">
+          <button (click)="onDeleteEvent(i)" class="btn btn-outline-danger" type="button">
             Eliminar
           </button>
         </div>
@@ -77,8 +80,7 @@
 
   <div class="row">
     <div class="col-sm-12">
-      <button type="submit" class="btn btn-primary float-end">
-        <!-- [disabled]="myForm.invalid" -->
+      <button type="submit" class="btn btn-primary float-end" [disabled]="myForm.invalid">
         Guardar
       </button>
     </div>
@@ -98,5 +100,5 @@
 <br>
 
 <span>Agregar Juego</span>
-<!-- <pre>{{ myForm | json }}</pre> -->
-<!-- <pre>{{ myForm | json }}</pre> -->
+<pre>{{ myForm.controls['favoriteGames'].errors| json }}</pre>
+<pre>{{ myForm.controls['favoriteGames'].value | json }}</pre>
