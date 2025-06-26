@@ -9,6 +9,7 @@ export class ErrorPipe implements PipeTransform {
   transform(value: ValidationErrors | null) {
     if (!value) return null
     const key = Object.keys(value)
+    console.log(value)
     switch (key[0]) {
       case 'required':
         return 'Este campo es requerido'
@@ -22,6 +23,10 @@ export class ErrorPipe implements PipeTransform {
         return this.regexErrorHelper(value['pattern'].requiredPattern)
       case 'passwordsNotEqual':
         return 'Las contraseñas no son iguales'
+      case 'emailTaken':
+        return 'El correo electronico ya se encuentra en uso'
+      case 'usernameInvalid':
+        return `El nombre de usuario ${value['username']} no esta permitido`
       default:
         return key
     }
