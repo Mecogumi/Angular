@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, effect, ElementRef, 
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { environment } from '../../../environments/environment';
 import { DecimalPipe, JsonPipe } from '@angular/common';
+import { timeout } from 'rxjs';
 
 mapboxgl.accessToken = environment.mapboxKey
 
@@ -31,9 +32,13 @@ mapboxgl.accessToken = environment.mapboxKey
   `
 })
 export class FullscreenMapPageComponent implements AfterViewInit {
-  divElement = viewChild<ElementRef>('map')
+  divElement = viewChild<ElementRef>('mapa')
   map = signal<mapboxgl.Map | null>(null)
   zoom = signal<number>(14)
+  coordinates = signal({
+    lng: -75.5,
+    lat: 40
+  })
 
   zoomEffect = effect(() => {
     if (!this.map()) return
@@ -41,13 +46,18 @@ export class FullscreenMapPageComponent implements AfterViewInit {
   })
 
   async ngAfterViewInit() {
-
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(null)
+      }, 80)
+    })
     if (!this.divElement()?.nativeElement) return
     const element = this.divElement()!.nativeElement
+    const { lng, lat } = this.coordinates()
     const map = new mapboxgl.Map({
       container: element, // container ID
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
-      center: [-74.5, 40], // starting position [lng, lat]
+      center: [lng, lat], // starting position [lng, lat]
       zoom: this.zoom(), // starting zoom
     });
     this.mapListeners(map)
@@ -58,6 +68,18 @@ export class FullscreenMapPageComponent implements AfterViewInit {
       const newzoom = event.target.getZoom()
       this.zoom.set(newzoom)
     })
+
+    map.on('moveend', (event) => {
+      // const center = event.target.getCenter()
+      const center = map.getCenter()
+      this.coordinates.set(center)
+    })
+
+    map.addControl(new mapboxgl.FullscreenControl)
+    map.addControl(new mapboxgl.NavigationControl)
+    map.addControl(new mapboxgl.GeolocateControl)
+    map.addControl(new mapboxgl.ScaleControl)
+    map.addControl(new mapboxgl.AttributionControl)
 
 
     this.map.set(map)
